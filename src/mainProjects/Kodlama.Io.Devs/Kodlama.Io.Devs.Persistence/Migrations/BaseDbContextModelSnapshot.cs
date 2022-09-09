@@ -55,6 +55,66 @@ namespace Kodlama.Io.Devs.Persistence.Migrations
                             Name = "Python"
                         });
                 });
+
+            modelBuilder.Entity("Kodlama.Io.Devs.Domain.Entities.ProgrammingLanguageTechnology", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Name");
+
+                    b.Property<int>("ProgrammingLanguageId")
+                        .HasColumnType("int")
+                        .HasColumnName("ProgrammingLanguageId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProgrammingLanguageId");
+
+                    b.ToTable("ProgrammingLanguageTechnologies", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "EntityFramework",
+                            ProgrammingLanguageId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Spring",
+                            ProgrammingLanguageId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Django",
+                            ProgrammingLanguageId = 3
+                        });
+                });
+
+            modelBuilder.Entity("Kodlama.Io.Devs.Domain.Entities.ProgrammingLanguageTechnology", b =>
+                {
+                    b.HasOne("Kodlama.Io.Devs.Domain.Entities.ProgrammingLanguage", "ProgrammingLanguage")
+                        .WithMany("ProgrammingLanguageTechnologies")
+                        .HasForeignKey("ProgrammingLanguageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProgrammingLanguage");
+                });
+
+            modelBuilder.Entity("Kodlama.Io.Devs.Domain.Entities.ProgrammingLanguage", b =>
+                {
+                    b.Navigation("ProgrammingLanguageTechnologies");
+                });
 #pragma warning restore 612, 618
         }
     }

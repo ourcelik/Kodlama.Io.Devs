@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Core.Application.Common;
+using Core.Application.Common.AutoMapper;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
 using Kodlama.Io.Devs.Application.Features.ProgrammingLanguages.Models;

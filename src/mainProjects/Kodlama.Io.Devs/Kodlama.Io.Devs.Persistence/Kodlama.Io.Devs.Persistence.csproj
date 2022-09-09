@@ -24,4 +24,8 @@
     <ProjectReference Include="..\Kodlama.Io.Devs.Application\Kodlama.Io.Devs.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

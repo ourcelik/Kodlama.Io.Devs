@@ -21,6 +21,10 @@
   <ItemGroup>
     <Folder Include="Features\ProgrammingLanguages\Constants\" />
     <Folder Include="Features\ProgrammingLanguages\Profiles\" />
+    <Folder Include="Features\ProgrammingLanguageTechnologies\Constants\" />
+    <Folder Include="Features\ProgrammingLanguageTechnologies\Rules\" />
+    <Folder Include="Features\ProgrammingLanguageTechnologies\Profiles\" />
+    <Folder Include="Profiles\" />
   </ItemGroup>
 
 </Project>

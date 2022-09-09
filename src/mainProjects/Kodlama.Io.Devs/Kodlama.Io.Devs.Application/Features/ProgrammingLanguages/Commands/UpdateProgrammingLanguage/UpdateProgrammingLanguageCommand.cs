@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Core.Application.Common;
+using Core.Application.Common.AutoMapper;
 using Kodlama.Io.Devs.Application.Features.ProgrammingLanguages.Dtos;
 using Kodlama.Io.Devs.Application.Features.ProgrammingLanguages.Rules;
 using Kodlama.Io.Devs.Application.Services.Repositories;

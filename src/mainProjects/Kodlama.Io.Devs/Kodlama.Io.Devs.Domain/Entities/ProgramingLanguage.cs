@@ -11,6 +11,8 @@ namespace Kodlama.Io.Devs.Domain.Entities
     {
         public string? Name { get; set; }
 
+        public ICollection<ProgrammingLanguageTechnology> ProgrammingLanguageTechnologies { get; set; }
+
         public ProgrammingLanguage(string name)
         {
             Name = name;

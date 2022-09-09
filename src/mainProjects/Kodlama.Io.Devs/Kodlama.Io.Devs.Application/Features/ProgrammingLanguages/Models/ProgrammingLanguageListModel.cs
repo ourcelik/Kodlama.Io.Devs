@@ -1,4 +1,4 @@
-﻿using Core.Application.Common;
+﻿using Core.Application.Common.AutoMapper;
 using Core.Persistence.Paging;
 using Kodlama.Io.Devs.Application.Features.ProgrammingLanguages.Dtos;
 using Kodlama.Io.Devs.Domain.Entities;

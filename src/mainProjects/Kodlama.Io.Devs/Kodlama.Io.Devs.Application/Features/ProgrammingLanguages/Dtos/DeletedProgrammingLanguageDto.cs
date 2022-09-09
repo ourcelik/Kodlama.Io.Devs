@@ -1,4 +1,4 @@
-﻿using Core.Application.Common;
+﻿using Core.Application.Common.AutoMapper;
 using Kodlama.Io.Devs.Domain.Entities;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,5 @@
-﻿using Core.Application.Pipelines.Validation;
+﻿using Core.Application.Common;
+using Core.Application.Pipelines.Validation;
 using FluentValidation;
 using Kodlama.Io.Devs.Application.Features.ProgrammingLanguages.Rules;
 using MediatR;
@@ -16,6 +17,7 @@ namespace Kodlama.Io.Devs.Application
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
 

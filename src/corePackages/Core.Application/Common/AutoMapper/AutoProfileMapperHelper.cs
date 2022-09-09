@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Core.Application.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,16 +6,12 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Application.Common
+namespace Core.Application.Common.AutoMapper
 {
-    public class AutoProfileMapper : Profile
+    public static class AutoProfileMapperHelper
     {
-        public AutoProfileMapper()
-        {
-            ApplyMappingsFromAssembly(Assembly.GetExecutingAssembly());
-        }
 
-        private void ApplyMappingsFromAssembly(Assembly assembly)
+        public static void ApplyMappingsFromAssembly(Assembly assembly, Profile profile)
         {
             var types = assembly.GetExportedTypes()
                 .Where(t => t.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IReverseMapWith<>))).ToList();
@@ -28,7 +23,7 @@ namespace Core.Application.Common
                 var methodInfo = type.GetMethod("Mapping")
                         ?? type?.GetInterface("IReverseMapWith`1")?.GetMethod("Mapping");
 
-                methodInfo?.Invoke(instance, new object[] { this });
+                methodInfo?.Invoke(instance, new object[] { profile });
             }
         }
     }
