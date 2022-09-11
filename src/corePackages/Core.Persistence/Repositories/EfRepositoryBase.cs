@@ -53,10 +53,14 @@ namespace Core.Persistence.Repositories
             return Context.Set<TEntity>().FirstOrDefault(predicate);
         }
 
-        public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate,bool enableTracking = true)
+        public async Task<TEntity?> GetAsync(Expression<Func<TEntity,bool>> predicate,
+                                             bool enableTracking = true,
+                                            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity,object>>? include = null
+                                            )
         {
-            return enableTracking ? await Context.Set<TEntity>().FirstOrDefaultAsync(predicate):
-                    await Context.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync(predicate);
+            IQueryable<TEntity> queryable =  enableTracking ? Query() : QueryNoTracking();
+            if(include !=null) include(queryable);
+            return await queryable.FirstOrDefaultAsync(predicate);;
         }
 
         public IPaginate<TEntity> GetList(Expression<Func<TEntity, bool>>? predicate = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null, int index = 0, int size = 10, bool enableTracking = true)
@@ -100,6 +104,10 @@ namespace Core.Persistence.Repositories
         public IQueryable<TEntity> Query()
         {
             return Context.Set<TEntity>();
+        }
+        public IQueryable<TEntity> QueryNoTracking()
+        {
+            return Context.Set<TEntity>().AsNoTracking();
         }
 
         public TEntity Update(TEntity entity)

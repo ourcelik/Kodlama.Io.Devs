@@ -16,10 +16,16 @@ namespace Kodlama.Io.Devs.WebAPI.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class ProgrammingLanguagesController : BaseController
-    {
+    {   
+        IHttpContextAccessor _httpContextAccessor;
+        public ProgrammingLanguagesController(IHttpContextAccessor httpContextAccessor)
+        {
+            _httpContextAccessor = httpContextAccessor;
+        }
         [HttpPost]
         public async Task<IActionResult> Add(CreateProgrammingLanguageCommand createProgrammingLanguageCommand)
         {
+            
             CreatedProgrammingLanguageDto result = await Mediator.Send(createProgrammingLanguageCommand);
             Console.WriteLine(HttpContext.Request);
             
@@ -42,9 +48,10 @@ namespace Kodlama.Io.Devs.WebAPI.Controllers
             return Ok(result);
         }
         
-        [HttpGet("{id}")]
+        [HttpGet()]
         public async Task<IActionResult> Get([FromQuery]GetProgrammingLanguageByIdQuery getProgrammingLanguageByIdQuery)
         {
+            
             GetProgrammingLanguageByIdDto result = await Mediator.Send(getProgrammingLanguageByIdQuery);
 
             return Ok(result);

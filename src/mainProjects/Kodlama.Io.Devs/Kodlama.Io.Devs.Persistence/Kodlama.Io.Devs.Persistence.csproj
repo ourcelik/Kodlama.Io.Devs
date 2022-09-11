@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Kodlama.Io.Devs.Application\Kodlama.Io.Devs.Application.csproj" />
+    <ProjectReference Include="..\..\..\corePackages\Core.Security\Core.Security.csproj" />
   </ItemGroup>
 
   <ItemGroup>

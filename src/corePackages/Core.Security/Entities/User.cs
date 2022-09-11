@@ -12,7 +12,7 @@ namespace Core.Security.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-
+        public string Username { get; set; }
         public byte[] PasswordSalt { get; set; }
 
         public byte[] PasswordHash { get; set; }
@@ -21,18 +21,19 @@ namespace Core.Security.Entities
 
         public AuthenticatorType AuthenticatorType { get; set; }
 
-        public virtual ICollection<UserOperationCliam> UserOperationClaims { get; set; }
+        public virtual ICollection<UserOperationClaim> UserOperationClaims { get; set; }
 
         public virtual ICollection<RefreshToken> RefreshTokens { get; set; }
 
         public User()
         {
-            UserOperationClaims = new HashSet<UserOperationCliam>();
+            UserOperationClaims = new HashSet<UserOperationClaim>();
             RefreshTokens = new HashSet<RefreshToken>();
         }
 
-        public User(int id, string firstName, string lastName, string email, byte[] passwordSalt, byte[] passwordHash, bool status, AuthenticatorType authenticatorType) : base(id)
+        public User(int id,string username, string firstName, string lastName, string email, byte[] passwordSalt, byte[] passwordHash, bool status, AuthenticatorType authenticatorType) : base(id)
         {
+            Username = username;
             FirstName = firstName;
             LastName = lastName;
             Email = email;

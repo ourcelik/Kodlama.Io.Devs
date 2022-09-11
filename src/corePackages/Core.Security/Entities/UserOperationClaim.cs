@@ -6,7 +6,7 @@ using Core.Persistence.Repositories;
 
 namespace Core.Security.Entities
 {
-    public class UserOperationCliam : Entity
+    public class UserOperationClaim : Entity
     {
         public int UserId { get; set; }
         public int OperationClaimId { get; set; }
@@ -14,12 +14,12 @@ namespace Core.Security.Entities
         public virtual User User { get; set; }
         public virtual OperationClaim OperationClaim { get; set; }
 
-        public UserOperationCliam()
+        public UserOperationClaim()
         {
             
         }
 
-        public UserOperationCliam(int id, int userId, int operationClaimId) : base(id)
+        public UserOperationClaim(int id, int userId, int operationClaimId) : base(id)
         {
             UserId = userId;
             OperationClaimId = operationClaimId;

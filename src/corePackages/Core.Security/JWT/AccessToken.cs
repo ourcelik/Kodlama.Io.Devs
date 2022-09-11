@@ -15,5 +15,9 @@ namespace Core.Security.JWT
             Token = token;
             Expiration = expiration;
         }
+        public AccessToken()
+        {
+            
+        }
     }
 }
