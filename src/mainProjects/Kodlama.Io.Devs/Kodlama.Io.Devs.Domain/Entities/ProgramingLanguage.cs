@@ -13,10 +13,7 @@ namespace Kodlama.Io.Devs.Domain.Entities
 
         public ICollection<ProgrammingLanguageTechnology> ProgrammingLanguageTechnologies { get; set; }
 
-        public ProgrammingLanguage(string name)
-        {
-            Name = name;
-        }
+        public ProgrammingLanguage(string name) => Name = name;
         public ProgrammingLanguage(int id,string name)
         {
             Id = id;

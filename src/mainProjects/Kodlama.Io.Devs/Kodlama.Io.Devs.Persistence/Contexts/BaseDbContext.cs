@@ -1,4 +1,5 @@
-﻿using Core.Security.Entities;
+﻿
+using Core.Security.Entities;
 using Core.Security.Enums;
 using Kodlama.Io.Devs.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,7 @@ namespace Kodlama.Io.Devs.Persistence.Contexts
         public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
+        public DbSet<GithubAccount> GithubAccounts { get; set; }
 
         public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
         {
@@ -78,6 +80,26 @@ namespace Kodlama.Io.Devs.Persistence.Contexts
                 uoc.Property(p => p.OperationClaimId).HasColumnName("OperationClaimId");
                 uoc.HasOne(p => p.User).WithMany(p => p.UserOperationClaims).HasForeignKey(p => p.UserId);
                 uoc.HasOne(p => p.OperationClaim).WithMany(p => p.UserOperationClaims).HasForeignKey(p => p.OperationClaimId);
+            });
+            modelBuilder.Entity<RefreshToken>(rt =>
+            {
+                rt.ToTable("RefreshTokens").HasKey(p => p.Id);
+                rt.Property(p => p.Id).HasColumnName("Id");
+                rt.Property(p => p.Token).HasColumnName("Token");
+                rt.Property(p => p.Expires).HasColumnName("Expiration");
+                rt.Property(p => p.UserId).HasColumnName("UserId");
+                rt.HasOne(p => p.User).WithMany(p => p.RefreshTokens).HasForeignKey(p => p.UserId);
+            });
+
+            modelBuilder.Entity<GithubAccount>(ga =>
+            {
+                ga.ToTable("GithubAccounts").HasKey(p => p.Id);
+                ga.Property(p => p.Id).HasColumnName("Id");
+                ga.Property(p => p.UserId).HasColumnName("UserId");
+                ga.Property(p => p.Url).HasColumnName("Url");
+                ga.Property(p => p.Username).HasColumnName("Username");
+                ga.Property(p => p.PublicRepos).HasColumnName("PublicRepos");
+                ga.HasOne(p => p.User);
             });
 
             ProgrammingLanguage[] PLSeeds = { new(1, "C#"),new(2,"Java"),new(3,"Python") };

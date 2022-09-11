@@ -18,21 +18,22 @@ namespace Kodlama.Io.Devs.Application.Features.Auth.Rules
         }
         public void CheckIfUserExists(User user)
         {
-                throw new BusinessException("Kullanıcı mevcut değil");
+                if(user == null)
+                    throw new BusinessException("User not found.");
         }
 
         public async Task UsernameShouldNotBeDuplicated(string username)
         {
             if (await _userRepository.GetAsync(x => x.Username == username) != null)
             {
-                throw new BusinessException("Kullanıcı adı zaten mevcut");
+                throw new BusinessException("Username is already taken.");
             }
         }
         public async Task EmailShouldNotBeDuplicated(string email)
         {
             if (await _userRepository.GetAsync(x => x.Email == email) != null)
             {
-                throw new BusinessException("Email zaten mevcut");
+                throw new BusinessException("Email is already taken.");
             }
         }
     }

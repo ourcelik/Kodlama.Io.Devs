@@ -1,5 +1,6 @@
 ﻿using Core.Security.JWT;
 using Kodlama.Io.Devs.Application.Services.Repositories;
+using Kodlama.Io.Devs.Application.Services.Repositories.Social;
 using Kodlama.Io.Devs.Persistence.Contexts;
 using Kodlama.Io.Devs.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +27,7 @@ namespace Kodlama.Io.Devs.Persistence
             services.AddScoped<IProgrammingLanguageTechnologyRepository, ProgrammingLanguageTechnologyRepository>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IGithubRepository, GithubRepository>();
             services.AddScoped<ITokenHelper, JtwHelper>();
             return services;
         }
