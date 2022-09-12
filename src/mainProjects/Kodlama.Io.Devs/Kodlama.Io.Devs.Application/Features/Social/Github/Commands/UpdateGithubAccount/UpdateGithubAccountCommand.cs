@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Core.Application.Pipelines.Authentication;
 using Core.Security.Extensions;
 using Kodlama.Io.Devs.Application.Features.Social.Github.Dtos;
 using Kodlama.Io.Devs.Application.Features.Social.Github.Rules;
@@ -14,7 +15,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Kodlama.Io.Devs.Application.Features.Social.Github.Commands.UpdateGithubAccount
 {
-    public class UpdateGithubAccountCommand : IRequest<UpdatedGithubAccountCommandDto>
+    public class UpdateGithubAccountCommand : IRequest<UpdatedGithubAccountCommandDto>,IAuthRequest
     {
         public string? Username { get; set; }
 
@@ -38,6 +39,7 @@ namespace Kodlama.Io.Devs.Application.Features.Social.Github.Commands.UpdateGith
 
             public async Task<UpdatedGithubAccountCommandDto> Handle(UpdateGithubAccountCommand request, CancellationToken cancellationToken)
             {
+                System.Console.WriteLine(_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated);
                 var UserId = _httpContextAccessor.HttpContext.User.GetUserId();
                 var githubAccountFromDb = await _githubRepository.GetAsync(g => g.UserId == UserId,false);
                 _githubBusinessRules.CheckIfGithubAccountExists(githubAccountFromDb);

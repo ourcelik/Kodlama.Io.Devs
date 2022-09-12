@@ -31,7 +31,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
            
         };
     });
-    
+
 builder.Services.AddPersistenceServices(builder.Configuration); // Add Persistence Services
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(); // Add Infrastructure Services

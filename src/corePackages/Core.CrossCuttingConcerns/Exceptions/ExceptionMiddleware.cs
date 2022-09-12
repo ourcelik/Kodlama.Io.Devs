@@ -34,6 +34,8 @@ public class ExceptionMiddleware
         if (exception.GetType() == typeof(BusinessException)) return CreateBusinessException(context, exception);
         if (exception.GetType() == typeof(AuthorizationException))
             return CreateAuthorizationException(context, exception);
+        if (exception.GetType() == typeof(AuthenticationException))
+            return CreateAuthenticationException(context, exception);
         return CreateInternalException(context, exception);
     }
 
@@ -46,6 +48,20 @@ public class ExceptionMiddleware
             Status = StatusCodes.Status401Unauthorized,
             Type = "https://example.com/probs/authorization",
             Title = "Authorization exception",
+            Detail = exception.Message,
+            Instance = ""
+        }.ToString());
+    }
+
+    private Task CreateAuthenticationException(HttpContext context, Exception exception)
+    {
+        context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.Unauthorized);
+
+        return context.Response.WriteAsync(new AuthenticationProblemDetails
+        {
+            Status = StatusCodes.Status401Unauthorized,
+            Type = "https://example.com/probs/authentication",
+            Title = "Authentication exception",
             Detail = exception.Message,
             Instance = ""
         }.ToString());

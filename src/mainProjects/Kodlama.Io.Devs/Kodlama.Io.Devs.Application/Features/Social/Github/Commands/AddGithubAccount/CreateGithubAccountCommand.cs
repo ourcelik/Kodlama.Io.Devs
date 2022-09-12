@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Core.Application.Pipelines.Authentication;
 using Core.Security.Extensions;
 using Kodlama.Io.Devs.Application.Features.Social.Github.Dtos;
 using Kodlama.Io.Devs.Application.Features.Social.Github.Rules;
@@ -14,7 +15,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Kodlama.Io.Devs.Application.Features.Social.Github.Commands.AddGithubAccount
 {
-    public class CreateGithubAccountCommand : IRequest<CreatedGithubAccountCommandDto>
+    public class CreateGithubAccountCommand : IRequest<CreatedGithubAccountCommandDto>,IAuthRequest
     {
         public string Username { get; set; }
 

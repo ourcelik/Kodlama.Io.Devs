@@ -23,5 +23,10 @@ namespace Core.Security.Extensions
     {
         return Convert.ToInt32(claimsPrincipal?.Claims(ClaimTypes.NameIdentifier)?.FirstOrDefault());
     }
+
+    public static bool IsAuthenticated(this ClaimsPrincipal claimsPrincipal)
+    {
+        return claimsPrincipal.Identity.IsAuthenticated;
+    }
 }
 }
