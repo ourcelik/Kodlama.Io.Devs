@@ -10,7 +10,10 @@ namespace Kodlama.Io.Devs.Application.Features.Social.Github.Rules
     {
         internal void CheckIfGithubAccountExists<T>(T githubAccountFromDb)
         {
-            throw new NotImplementedException();
+            if (githubAccountFromDb == null)
+            {
+                throw new Exception("Github account not found");
+            }
         }
     }
 }
